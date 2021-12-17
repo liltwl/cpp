@@ -1,0 +1,41 @@
+
+NAME = Zombie
+
+CFLAGS = -Wall -Wextra -Werror
+
+HEADER =
+
+CC = clang++
+
+FIL_ = main.cpp Zombie.cpp ZombieHorde.cpp
+
+
+OBJ = $(FIL:.c=.o)
+
+FIL = $(addprefix ./, $(FIL_))
+
+all: $(NAME)
+
+$(NAME): $(FIL)
+	$(CC) $(CFLAGS) $(FIL) -o $(NAME)
+
+
+fclean:
+	rm -f $(NAME)
+
+re: fclean all
+
+me:
+	@echo $(NAME)
+	@echo "#    #  ####   ####  #####   #    #  ####   ####  #####  "
+	@echo "##   # #    # #    # #    #  ##   # #    # #    # #    # "
+	@echo "# #  # #    # #    # #####   # #  # #    # #    # #####  "
+	@echo "#  # # #    # #    # #    #  #  # # #    # #    # #    # "
+	@echo "#   ## #    # #    # #    #  #   ## #    # #    # #    # "
+	@echo "#    #  ####   ####  #####   #    #  ####   ####  #####  "
+
+norm:
+	norminette $(FIL) $(addprefix ./inc/, $(HEADER)) $(FIL_B)
+
+leaks:
+	leaks $(NAME) > leak
