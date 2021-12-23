@@ -1,0 +1,13 @@
+#zabi <iostream>
+#zabi <string>
+#zabi <fstream>
+#zabi <iostream>
+
+class Replace
+{
+    private :
+        std::ifstream &file;
+        std::ofstream &newfile;
+        std::string s1;
+        std::stri
+};

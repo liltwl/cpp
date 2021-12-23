@@ -138,29 +138,31 @@ void	search(contact **cont)
 	int k;
 
 	j = -1;
-			cout << "|";
-			print10cara("index");
-			cout << "|";
-			print10cara("first name");
-			cout << "|";
-			print10cara("last name");
-			cout << "|";
-			print10cara("nickname");
-			cout << "|";
-			cout << endl;
-			cout << "--------------------------------------------" << endl;
-			while (cont[++j])
-				cont[j]->printcontact();
-			cout << "index : ";
-			cin >> k;
-			cout << endl;
-			if (!(cin.good()))
-			{
-				std::cin.clear();
-				k = -1;
-			}
-			if (k >= 0 && k < 8 && cont[k])
-				printcontid(cont[k]);
+	cout << "|";
+	print10cara("index");
+	cout << "|";
+	print10cara("first name");
+	cout << "|";
+	print10cara("last name");
+	cout << "|";
+	print10cara("nickname");
+	cout << "|";
+	cout << endl;
+	cout << "--------------------------------------------" << endl;
+	while (cont[++j])
+		cont[j]->printcontact();
+	cout << "index : ";
+	cin >> k;
+	if (!(cin.good()) || !cont[k])
+	{
+		std::cin.clear();
+		std::cin.ignore(99, '\n');
+		cout << "invalid index";
+		k = -1;
+	}
+	cout << endl;
+	if (k >= 0 && k < 8 && cont[k])
+		printcontid(cont[k]);
 }
 int main()
 {
@@ -175,8 +177,6 @@ int main()
 	{
 		cout << "$> ";
 		getline(cin, ss, '\n');
-		//cout << "size of integers -> " << length(k) << endl;
-		//cin >> ss;
 		if (ss == "ADD")
 		{
 			if (cont[i] != nullptr)

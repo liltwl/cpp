@@ -1,33 +1,29 @@
 #include <iostream>
-using namespace std;
+#include <cctype>
 
-int ft_isalpha(char i)
+int main(int arv, char **p)
 {
-  if(i < 97 || i > 122)
-    return (0);
-  return (1);
-}
-
-int main(int arv, char **p) {
-  // std::cout << "Hello World!" << endl;
-
   int i;
   int k;
-  i = 0;
-  if (!p[1])
+
+  k = 1;
+  if (arv <= 1)
   {
-    cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << endl;
+    std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     return (1);
   }
-
-  while (p[1][i])
+  while (p[k])
   {
-    std::cin >> k;
-    if (ft_isalpha(p[1][i]) == 1)
-      cout << (char)(p[1][i++] - 32);
-    else
-      cout << p[1][i++];
+    i = 0;
+    while (p[k][i])
+    {
+      if (std::isalpha(p[k][i]))
+        std::cout << (char)std::toupper(p[k][i++]);
+      else
+        std::cout << p[k][i++];
+    }
+    k++;
   }
-  cout << endl;
+  std::cout << std::endl;
   return 0;
 }
