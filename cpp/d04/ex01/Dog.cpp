@@ -3,15 +3,18 @@
 Dog::Dog(std::string const &_type) : Animal(_type)
 {
 	std::cout << "Dog constructor called" << std::endl;
+	_Brain = new Brain();
 }
 
 Dog::Dog()
 {
 	std::cout << "Dog constructor called" << std::endl;
+	_Brain = new Brain();
 }
 
 Dog::~Dog() {
 	std::cout << "Dog destructor called" << std::endl;
+	delete _Brain;
 }
 
 Dog &Dog::operator=(Dog const & other)

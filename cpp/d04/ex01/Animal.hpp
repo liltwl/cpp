@@ -13,7 +13,7 @@ class Animal
         Animal();
         Animal(std::string const &_type);
         Animal(Animal const &Animal);
-        ~Animal();
+        virtual ~Animal();
         // Copy assignment operator.
         Animal &operator=(Animal const &other);
         const std::string &getType(void) const;

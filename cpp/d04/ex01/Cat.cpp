@@ -1,17 +1,21 @@
 #include "Cat.hpp"
+#include "Brain.hpp"
 
 Cat::Cat(const std::string &_type) : Animal(_type)
 {
 	std::cout << "Cat constructor called" << std::endl;
+	_Brain = new Brain();
 }
 
 Cat::Cat()
 {
 	std::cout << "Cat constructor called" << std::endl;
+	_Brain = new Brain();
 }
 
 Cat::~Cat() {
 	std::cout << "Cat destructor called" << std::endl;
+	delete _Brain;
 }
 
 Cat &Cat::operator=(Cat const & other)

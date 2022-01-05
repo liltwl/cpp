@@ -2,6 +2,7 @@
 #define __CAT_HPP__
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal
 {
@@ -9,11 +10,14 @@ class Cat : public Animal
         Cat();
         Cat(std::string const &_type);
         Cat(Cat const &Cat);
-        ~Cat();
+        virtual ~Cat();
         // Copy assignment operator.
         Cat &operator=(Cat const &other);
         const std::string &getType(void) const;
 
-        virtual void  makeSound(void) const;
+        void  makeSound(void) const;
+    
+    private :
+        Brain *_Brain;
 };
 #endif
