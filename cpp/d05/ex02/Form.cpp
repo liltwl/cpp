@@ -65,7 +65,7 @@ int main()
 {
     try
     {
-        Brcrat b("Fwfw", -1);
+        Brcrat b("Fwfw", 5);
         const std::string ss = "dqwdqwd";
         Form q;
         int i=5,r=9;
