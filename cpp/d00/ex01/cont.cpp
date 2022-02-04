@@ -169,6 +169,7 @@ int main()
     int i;
 	contact *cont[9];
 	string ss;
+
 	i = 0;
 	while (cont[i])
 		cont[i++] = nullptr;
