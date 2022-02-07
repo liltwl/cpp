@@ -7,7 +7,7 @@ HEADER =
 
 CC = clang++
 
-FIL_ = cont.cpp
+FIL_ = cont.cpp phonebook.cpp
 
 
 OBJ = $(FIL:.c=.o)

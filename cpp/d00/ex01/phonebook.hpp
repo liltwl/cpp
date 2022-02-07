@@ -14,7 +14,7 @@ class phonebook {
         ~phonebook();
 
         void search();
-        void add();
+        int add(int id);
 };
 
 #endif

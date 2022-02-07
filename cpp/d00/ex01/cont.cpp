@@ -1,32 +1,38 @@
 #include "cont.hpp"
+#include "phonebook.hpp"
 
-using namespace std;
+contact::contact()
+{
+	std::cout << "contact const called" << std::endl;
+	empty = 1;
+
+}
 
 void	print10int(int str)
 {
 	int i;
 	int	j;
-	string s;
+	std::string s;
 
-	s = to_string(str);
+	s = std::to_string(str);
 	j = s.size();
 	i = 0;
 	while (i < 10)
 	{
 		while (i < (10 - j))
 		{
-			cout << " ";
+			std::cout << " ";
 			i++;
 		}
 		if (s[(10 - j) - i])
 		{
-			cout << (s[(10 - j) - i]);
+			std::cout << (s[(10 - j) - i]);
 			i++;
 		}
 	}
 }
 
-void	print10cara(string str)
+void	print10cara(std::string str)
 {
 	int i;
 	int	size;
@@ -35,29 +41,29 @@ void	print10cara(string str)
 	i = 0;
 	if (size == 10)
 	{
-		cout << str;
+		std::cout << str;
 		i = 10;
 	}
 	while (i < 9)
 	{
 		if (str[i])
-			cout << str[i++];
+			std::cout << str[i++];
 		else
 		{
 			while (i < 10)
 			{
-				cout << " ";
+				std::cout << " ";
 				i++;
 			}
 		}
 	}
 	if (i == 9 && str[i + 1])
-		cout << ".";
+		std::cout << ".";
 	else if (i != 10)
-		cout << " ";
+		std::cout << " ";
 }
 
-contact::contact(string  _fname,string  _lname, string _nname, string  _phnum, string _drksecret, int _id)
+contact::contact(std::string  _fname,std::string  _lname, std::string _nname, std::string  _phnum, std::string _drksecret, int _id)
 {
 	fname = _fname;
 	lname = _lname;
@@ -65,130 +71,77 @@ contact::contact(string  _fname,string  _lname, string _nname, string  _phnum, s
 	phnum = _phnum;
 	drksecret = _drksecret;
 	id = _id;
+	empty = 0;
 }
-string contact::getfname()
+std::string contact::getfname()
 {
 	return (fname);
 }
-string contact::getlname()
+std::string contact::getlname()
 {
 	return (lname);
 }
-string contact::getnname()
+std::string contact::getnname()
 {
 	return (nname);
 }
-string contact::getphnum()
+std::string contact::getphnum()
 {
 	return (phnum);
 }
-string contact::getsecret()
+std::string contact::getsecret()
 {
 	return (drksecret);
 }
 void	contact::printcontact()
 {
-	cout << "|";
+	std::cout << "|";
 	print10int(id);
-	cout << "|";
+	std::cout << "|";
 	print10cara(fname);
-	cout << "|";
+	std::cout << "|";
 	print10cara(lname);
-	cout << "|";
+	std::cout << "|";
 	print10cara(nname);
-	cout << "|";
-	cout << endl;
+	std::cout << "|";
+	std::cout << std::endl;
 }
 
+int		contact::isempty()
+{
+	return (empty);
+}
 void printcontid(contact *c)
 {
-	cout << "first name     : " << c->getfname() << endl;
-	cout << "last name      : " << c->getlname() << endl;
-	cout << "nickname       : " << c->getnname() << endl;
-	cout << "phone number   : " << c->getphnum() << endl;
-	cout << "darkest secret : " << c->getsecret() << endl;
+	std::cout << "first name     : " << c->getfname() << std::endl;
+	std::cout << "last name      : " << c->getlname() << std::endl;
+	std::cout << "nickname       : " << c->getnname() << std::endl;
+	std::cout << "phone number   : " << c->getphnum() << std::endl;
+	std::cout << "darkest secret : " << c->getsecret() << std::endl;
 }
 
-contact *addcontact(int id)
-{
-    contact *cc;
-    string  fname;
-    string  lname;
-    string  nname;
-	string     phnum;
-    string  drksecret;
-
-	cout << "first name :" << endl;
-	getline(cin, fname);
-	cout << "last name :" << endl;
-	getline(cin, lname);
-	cout << "nickname :" << endl;
-	getline(cin, nname);
-	cout << "phone number :" << endl;
-	getline(cin, phnum);
-	cout << "darkest secret :" << endl;
-	getline(cin, drksecret);
-	cc = new contact(fname, lname, nname, phnum, drksecret, id);
-	return (cc);
-}
-
-void	search(contact **cont)
-{
-	int j;
-	int k;
-
-	j = -1;
-	cout << "|";
-	print10cara("index");
-	cout << "|";
-	print10cara("first name");
-	cout << "|";
-	print10cara("last name");
-	cout << "|";
-	print10cara("nickname");
-	cout << "|";
-	cout << endl;
-	cout << "--------------------------------------------" << endl;
-	while (cont[++j])
-		cont[j]->printcontact();
-	cout << "index : ";
-	cin >> k;
-	if (!(cin.good()) || !cont[k])
-	{
-		std::cin.clear();
-		std::cin.ignore(99, '\n');
-		cout << "invalid index";
-		k = -1;
-	}
-	cout << endl;
-	if (k >= 0 && k < 8 && cont[k])
-		printcontid(cont[k]);
-}
 int main()
 {
     int i;
-	contact *cont[9];
-	string ss;
+	phonebook pp;
+	std::string ss;
 
-	i = 0;
-	while (cont[i])
-		cont[i++] = nullptr;
 	i = 0;
     while (1)
 	{
-		cout << "$> ";
-		getline(cin, ss, '\n');
+		std::cout << "$> ";
+		getline(std::cin, ss, '\n');
 		if (ss == "ADD")
 		{
-			if (cont[i] != nullptr)
-				delete(cont[i]);
-			cont[i] = addcontact(i);
-			i++;
+			if (pp.add(i))
+				i++;
 		}
 		else if (ss == "SEARCH")
-			search(cont);
-		else if (ss == "EXIT")
-			exit (0);
+			pp.search();
+		else if (ss == "EXIT" || !std::cin.good())
+		{
+			break ;
+		}
 		if (i == 8)
 			i = 0;
 		ss.clear();
