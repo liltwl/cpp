@@ -1,3 +1,7 @@
+#ifndef __ZOMBIE_HPP__
+#define __ZOMBIE_HPP__
+
+
 #include <iostream>
 #include <string>
 
@@ -7,9 +11,12 @@ class Zombie {
 
     public :
         Zombie(std::string _name);
+        Zombie();
         ~Zombie();
+        void setname(std::string name);
         void    announce();
 };
 
-Zombie* newZombie( std::string name );
 Zombie* zombieHorde( int N, std::string name );
+
+#endif

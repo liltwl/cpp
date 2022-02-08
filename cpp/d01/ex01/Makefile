@@ -3,9 +3,7 @@ NAME = Zombie
 
 CFLAGS = -Wall -Wextra -Werror
 
-HEADER =
-
-CC = clang++
+CC = c++
 
 FIL_ = main.cpp Zombie.cpp ZombieHorde.cpp
 
@@ -34,8 +32,3 @@ me:
 	@echo "#   ## #    # #    # #    #  #   ## #    # #    # #    # "
 	@echo "#    #  ####   ####  #####   #    #  ####   ####  #####  "
 
-norm:
-	norminette $(FIL) $(addprefix ./inc/, $(HEADER)) $(FIL_B)
-
-leaks:
-	leaks $(NAME) > leak

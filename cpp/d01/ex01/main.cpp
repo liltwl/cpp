@@ -2,10 +2,11 @@
 
 int main()
 {
-    Zombie *z[5];
+    Zombie *z;
+    int i = 0;
 
-    *z = zombieHorde(5, "noob");
-    z[1]->announce();
-    z[3]->announce();
-    delete (z[0]);
+    z = zombieHorde(5, "noob");
+    while (i < 5)
+        z[i++].announce();
+    delete[] (z);
 }

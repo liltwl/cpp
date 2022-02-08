@@ -1,11 +1,11 @@
 
-NAME = weapon
+NAME = replace
 
 CFLAGS = -Wall -Wextra -Werror
 
 CC = c++
 
-FIL_ = main.cpp	HumanA.cpp Weapon.cpp HumanB.cpp
+FIL_ = main.cpp replace.cpp
 
 
 OBJ = $(FIL:.c=.o)
