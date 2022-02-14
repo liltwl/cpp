@@ -12,19 +12,36 @@ Form::Form(std::string _name, int _gradetosign, int _gradetoexec) : name(_name),
     i = 0;
     std::cout << "Form constructor called" << std::endl;
     if (gradetosign < 1)
-        throw "Bureaucrat::GradeTooHighException";
+        throw GradeTooHighException();
     else if (gradetosign > 150)
-        throw "Bureaucrat::GradeTooLowException";
+        throw GradeTooLowException();
     if (gradetoexec < 1)
-        throw "Bureaucrat::GradeTooHighException";
+        throw GradeTooHighException();
     else if (gradetoexec > 150)
-        throw "Bureaucrat::GradeTooLowException";
+        throw GradeTooLowException();
+}
+
+Form::Form(Form const &other): name(""), gradetosign(0), gradetoexec(0)
+{
+    *this = other;
+    std::cout << "Form copy constructor called" << std::endl;
 }
 
 Form::~Form()
 {
     std::cout << "Form destructor called" << std::endl;
 }
+
+Form &Form::operator=(Form const &other)
+{
+    if (this != &other)
+    {
+        this->i = other.getI();
+        std::cout << "Form copy assignment operator" << std::endl;
+    }
+    return (*this);
+}
+
 
 const std::string Form::getName() const
 {
@@ -46,9 +63,20 @@ const int Form::getgradetoexec() const
     return (gradetoexec);
 }
 
+const char* Form::GradeTooHighException::what() const throw()
+{
+    return ("grade is toooooooo high");
+}
+
+const char* Form::GradeTooLowException::what() const throw()
+{
+    return ("grade is tooo low");
+}
+
+
 std::ostream& operator<< (std::ostream &out, Form &_Form)
 {
-    out << "<" << _Form.getName() << ">, Form grade required to sign " << _Form.getgradetosign() << ", grade required to execute " << _Form.getgradetoexec() << " , " << _Form.getI() << " . ";
+    out  << _Form.getName() << " Form grade required to sign " << _Form.getgradetosign() << ", grade required to execute " << _Form.getgradetoexec() << " , " << _Form.getI() << " . ";
     return (out);
 }
 
@@ -57,26 +85,6 @@ void Form::beSigned(const Brcrat &B)
     if (B.getGrade() <= gradetosign)
         i = 1;
     else
-        throw "Form::GradeTooLowException";
+        throw GradeTooLowException();
 }
 
-
-int main()
-{
-    try
-    {
-        Brcrat b("Fwfw", -1);
-        const std::string ss = "dqwdqwd";
-        Form q;
-        int i=5,r=9;
-        Form A(ss, 60 , r);
-        A.beSigned(b);
-        b.signForm(A);
-        std::cout << A << std::endl;
-    }
-    catch(const char *s)
-    {
-        std::cout << s << std::endl;
-    }
-
-}

@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Brcrat::Brcrat()
 {
@@ -11,10 +12,16 @@ Brcrat::Brcrat(const std::string &_name, int _grade) : name(_name)
 {
     std::cout << "Bureaucrat constructor called" << std::endl;
     if (_grade < 1)
-        throw "Bureaucrat::GradeTooHighException";
+        throw GradeTooHighException();
     else if (_grade > 150)
-       throw "Bureaucrat::GradeTooLowException";
+       throw GradeTooLowException();
     grade = _grade;
+}
+
+Brcrat::Brcrat(Brcrat const &other)
+{
+    *this = other;
+    std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
 Brcrat::~Brcrat()
@@ -22,7 +29,18 @@ Brcrat::~Brcrat()
     std::cout << "Bureaucrat destructor called" << std::endl;  
 }
 
-const std::string Brcrat::getNmae(void) const
+Brcrat &Brcrat::operator=(Brcrat const &other)
+{
+    if (this != &other)
+    {
+        name = other.getName();
+        grade = other.getGrade();
+        std::cout << "Bureaucrat copy assignment operator" << std::endl;
+    }
+    return (*this);
+}
+
+const std::string Brcrat::getName(void) const
 {
     return (name);
 }
@@ -32,27 +50,38 @@ int Brcrat::getGrade(void) const
     return (grade);
 }
 
+const char* Brcrat::GradeTooHighException::what() const throw()
+{
+    return ("grade is toooooooo high");
+}
+
+const char* Brcrat::GradeTooLowException::what() const throw()
+{
+    return ("grade is tooo low");
+}
+
 void    Brcrat::incrementGrade(void)
 {
     if (grade - 1 < 1)
-        throw "Bureaucrat::GradeTooHighException";
+        throw GradeTooHighException();
     else if (grade - 1 > 150)
-       throw "Bureaucrat::GradeTooLowException";
+      throw GradeTooLowException();
     grade--;
 }
 
 void    Brcrat::decrementGrade(void)
 {
     if (grade + 1 < 1)
-        throw "Bureaucrat::GradeTooHighException";
+        throw GradeTooHighException();
     else if (grade + 1 > 150)
-       throw "Bureaucrat::GradeTooLowException";
+       throw GradeTooLowException();
     grade++;
 }
 
+
 std::ostream& operator<< (std::ostream &out, Brcrat &_Brcrat)
 {
-    out << "<" << _Brcrat.getNmae() << ">, bureaucrat grade " << _Brcrat.getGrade() << ".";
+    out << _Brcrat.getName() << ", bureaucrat grade " << _Brcrat.getGrade() << ".";
     return (out);
 }
 
@@ -60,7 +89,7 @@ std::ostream& operator<< (std::ostream &out, Brcrat &_Brcrat)
 void Brcrat::signForm(const Form &_Form)
 {
     if (_Form.getI() == 0)
-        std::cout << "<" << name << "> cannot sign <" << _Form.getName() << "> because of you." << std::endl;
+        std::cout << name << " cannot sign " << _Form.getName() << " because of you." << std::endl;
     else
-        std::cout << "<" << name << "> signs <" << _Form.getName() << ">"  << std::endl;
+        std::cout << name << " signs " << _Form.getName()  << std::endl;
 }

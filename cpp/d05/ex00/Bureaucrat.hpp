@@ -4,23 +4,36 @@
 #include <string>
 #include <iostream>
 
-class Brcrat
+class Bureaucrat
 {
     private :
         std::string name;
         int     grade;
 
     public :
-        Brcrat();
-        Brcrat(const std::string &_name, int _grade);
-        ~Brcrat();
+        Bureaucrat();
+        Bureaucrat(const std::string &_name, int _grade);
+        Bureaucrat(Bureaucrat const &other);
+        ~Bureaucrat();
+        Bureaucrat &operator=(Bureaucrat const &other);
 
-        const std::string getNmae(void) const;
+        const std::string getName(void) const ;
         int getGrade(void) const;
+
+        class GradeTooHighException : public std::exception
+        {
+            public : 
+                const char* what() const throw();
+        };
+        class GradeTooLowException : public std::exception
+        {        
+            public :
+                const char* what() const throw();
+        };
 
         void incrementGrade(void);
         void decrementGrade(void);
 };
 
-std::ostream& operator<< (std::ostream &out, Brcrat &_Brcrat);
+std::ostream& operator<< (std::ostream &out, Bureaucrat &_Bureaucrat);
 #endif

@@ -4,14 +4,17 @@ int main()
 {
     try
     {
-       Brcrat *A = new Brcrat("omar", 2);
+       Bureaucrat *A = new Bureaucrat("omar", 102);
+       Bureaucrat *B = new Bureaucrat();
 
+        *B = *A;
         A->incrementGrade();
 
         std::cout << (*A) << std::endl;
+        std::cout << *B << std::endl;
     }
-    catch(const char *msg)
+    catch(std::exception & e)
     {
-        std::cerr << msg << '\n';
+        std::cerr << e.what() << '\n';
     }
 }
