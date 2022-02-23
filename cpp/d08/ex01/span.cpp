@@ -39,6 +39,17 @@ void Span::addNumber(int a)
     num.push_back(a);
 }
 
+void Span::addNumber()
+{
+    int i = num.size();
+
+    if (n == num.size())
+        throw outofsize();
+    
+    num.push_back();
+}
+
+
 int Span::shortestSpan()
 {
     std::vector<int>::iterator first;

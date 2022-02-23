@@ -14,7 +14,7 @@ int main()
     num.push_back(3);
     try
     {
-        std::cout << *easyfind(num, 8) << std::endl;
+        std::cout << *easyfind(num, 99) << std::endl;
     }
     catch(std::exception &c)
     {
